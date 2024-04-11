@@ -36,9 +36,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\CSliderCtrl\SliderCtrlEx.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Common\MemoryDC.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -48,10 +45,16 @@
     <ClInclude Include="..\..\Common\Functions.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\CSliderCtrl\MacProgressCtrl.h">
+    <ClInclude Include="..\..\Common\colors.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Common\colors.h">
+    <ClInclude Include="..\..\Common\CProgressCtrl\MacProgressCtrl\MacProgressCtrl.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\GdiplusBitmap.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\CSliderCtrl\SCSliderCtrl\SCSliderCtrl.h">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,19 +68,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\CSliderCtrl\SliderCtrlEx.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Common\AutoFont.cpp">
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Common\Functions.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\CSliderCtrl\MacProgressCtrl.cpp">
+    <ClCompile Include="..\..\Common\colors.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Common\colors.cpp">
+    <ClCompile Include="..\..\Common\CProgressCtrl\MacProgressCtrl\MacProgressCtrl.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\GdiplusBitmap.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\CSliderCtrl\SCSliderCtrl\SCSliderCtrl.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +99,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Test_SliderCtrlEx.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\check_fail.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\check_ok.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\checking.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\images\checking_gray.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

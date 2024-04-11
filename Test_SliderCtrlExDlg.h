@@ -5,8 +5,8 @@
 #pragma once
 #include "afxcmn.h"
 
-#include "../../Common/CSliderCtrl/SliderCtrlEx.h"
-#include "../../Common/CSliderCtrl/MacProgressCtrl.h"
+#include "../../Common/CSliderCtrl/SCSliderCtrl/SCSliderCtrl.h"
+#include "../../Common/CProgressCtrl/MacProgressCtrl/MacProgressCtrl.h"
 #include "afxwin.h"
 
 // CTest_SliderCtrlExDlg dialog
@@ -40,7 +40,7 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
-	CSliderCtrlEx m_slider[4];
+	CSCSliderCtrl m_slider[4];
 	CMacProgressCtrl m_progress1;
 	afx_msg void OnBnClickedButtonBookmark();
 	afx_msg void OnBnClickedButtonBookmarkClear();
@@ -51,4 +51,7 @@ public:
 	afx_msg void OnBnClickedCheckEnable();
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	CSCSliderCtrl m_slider_step;
+	CSCSliderCtrl m_slider_stepv;
+	CMacProgressCtrl m_progress_marquee;
 };

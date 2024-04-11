@@ -66,6 +66,9 @@ void CTest_SliderCtrlExDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SLIDER4, m_slider[3]);
 	DDX_Control(pDX, IDC_PROGRESS1, m_progress1);
 	DDX_Control(pDX, IDC_CHECK_ENABLE, m_check_enable);
+	DDX_Control(pDX, IDC_SLIDER_STEP, m_slider_step);
+	DDX_Control(pDX, IDC_SLIDER_STEPV, m_slider_stepv);
+	DDX_Control(pDX, IDC_PROGRESS_MARQUEE, m_progress_marquee);
 }
 
 BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
@@ -74,7 +77,7 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CTest_SliderCtrlExDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CTest_SliderCtrlExDlg::OnBnClickedCancel)
-	ON_MESSAGE(MESSAGE_SLIDERCTRLEX, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
+	ON_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmark)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_CLEAR, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkClear)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_PREV, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkPrev)
@@ -133,12 +136,13 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider[3].set_bookmark_color(deeppink);
 	m_slider[3].set_bookmark_current_color(lightpink);
 	for (i = 0; i < 1; i++)
-		m_slider[3].bookmark(CSliderCtrlEx::bookmark_add, random19937(0, (int)max));
+		m_slider[3].bookmark(CSCSliderCtrl::bookmark_add, random19937(0, (int)max));
 	m_slider[3].use_tooltip(true);
-	m_slider[3].set_tooltip_format(CSliderCtrlEx::tooltip_time);
+	m_slider[3].set_tooltip_format(CSCSliderCtrl::tooltip_time);
 
-	m_progress1.SetIndeterminate();
-	return TRUE;
+	//m_progress1.SetIndeterminate();
+	//return TRUE;
+
 	m_progress1.SetRange32(0, max);
 	m_progress1.SetPos((m_progress1.GetRangeMax() - m_progress1.GetRangeMin()) / 2.0);
 	m_progress1.SetGradient();
@@ -146,6 +150,17 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_progress1.set_text_color(black, white);
 	m_progress1.show_text(true, CMacProgressCtrl::text_format_value);
 	m_progress1.use_invert_text_color();
+
+	//m_progress_marquee.SetMarquee(TRUE, 10);
+	m_progress_marquee.SetIndeterminate();
+
+	m_slider_step.SetStyle(CSCSliderCtrl::slider_step);
+	m_slider_step.SetRange(0, 3);
+	m_slider_step.set_step_image(-1, IDB_CHECKING_GRAY);
+
+	m_slider_stepv.SetStyle(CSCSliderCtrl::slider_step);
+	m_slider_stepv.SetRange(0, 3);
+	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -203,8 +218,10 @@ HCURSOR CTest_SliderCtrlExDlg::OnQueryDragIcon()
 
 void CTest_SliderCtrlExDlg::OnBnClickedOk()
 {
-	// TODO: Add your control notification handler code here
-	CDialogEx::OnOK();
+	m_slider_step.set_step_image(1, IDB_CHECK_OK);
+	m_slider_step.set_step_image(2, IDB_CHECK_FAIL);
+	m_slider_stepv.set_step_image(1, IDB_CHECK_OK);
+	m_slider_stepv.set_step_image(2, IDB_CHECK_FAIL);
 }
 
 
@@ -216,7 +233,7 @@ void CTest_SliderCtrlExDlg::OnBnClickedCancel()
 
 LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lParam)
 {
-	CSliderCtrlExMsg *msg = (CSliderCtrlExMsg*)wParam;
+	CSCSliderCtrlMsg *msg = (CSCSliderCtrlMsg*)wParam;
 	for (int i = 0; i < 4; i++)
 		m_slider[i].SetPos(msg->pos);
 	m_progress1.SetPos(msg->pos);
@@ -232,19 +249,19 @@ void CTest_SliderCtrlExDlg::OnBnClickedButtonBookmark()
 
 void CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkClear()
 {
-	m_slider[3].bookmark(CSliderCtrlEx::bookmark_reset);
+	m_slider[3].bookmark(CSCSliderCtrl::bookmark_reset);
 }
 
 
 void CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkPrev()
 {
-	m_slider[3].bookmark(CSliderCtrlEx::bookmark_move, false);
+	m_slider[3].bookmark(CSCSliderCtrl::bookmark_move, false);
 }
 
 
 void CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkNext()
 {
-	m_slider[3].bookmark(CSliderCtrlEx::bookmark_move, true);
+	m_slider[3].bookmark(CSCSliderCtrl::bookmark_move, true);
 }
 
 
@@ -252,7 +269,7 @@ void CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkAddRandom()
 {
 	int min = m_slider[3].GetRangeMin();
 	int max = m_slider[3].GetRangeMax();
-	m_slider[3].bookmark(CSliderCtrlEx::bookmark_add, random19937(min, max));
+	m_slider[3].bookmark(CSCSliderCtrl::bookmark_add, random19937(min, max));
 }
 
 
