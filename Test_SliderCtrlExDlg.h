@@ -40,7 +40,6 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
-	CSCSliderCtrl m_slider[4];
 	CMacProgressCtrl m_progress1;
 	afx_msg void OnBnClickedButtonBookmark();
 	afx_msg void OnBnClickedButtonBookmarkClear();
@@ -51,6 +50,11 @@ public:
 	afx_msg void OnBnClickedCheckEnable();
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	CSCSliderCtrl m_slider_normal;
+	CSCSliderCtrl m_slider_thumb;
+	CSCSliderCtrl m_slider_thumb_round;
+	CSCSliderCtrl m_slider_value;
+	CSCSliderCtrl m_slider_bookmark;
 	CSCSliderCtrl m_slider_step;
 	CSCSliderCtrl m_slider_stepv;
 	CMacProgressCtrl m_progress_marquee;
