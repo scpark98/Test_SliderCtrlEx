@@ -78,7 +78,7 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CTest_SliderCtrlExDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CTest_SliderCtrlExDlg::OnBnClickedCancel)
-	ON_MESSAGE(Message_SCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
+	ON_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmark)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_CLEAR, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkClear)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_PREV, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkPrev)
@@ -86,6 +86,7 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_ADD_RANDOM, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkAddRandom)
 	ON_BN_CLICKED(IDC_CHECK_ENABLE, &CTest_SliderCtrlExDlg::OnBnClickedCheckEnable)
 	ON_WM_HSCROLL()
+	ON_WM_WINDOWPOSCHANGED()
 END_MESSAGE_MAP()
 
 
@@ -129,7 +130,6 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_normal.SetPos(max / 2);
 	m_slider_normal.set_active_color(RGB(120, 215, 146));
 
-	/*
 	m_slider_thumb.set_style(CSCSliderCtrl::slider_thumb);
 	m_slider_thumb.SetRange(0, max);
 	m_slider_thumb.SetPos(max / 2);
@@ -158,11 +158,11 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 
 	m_progress1.SetRange32(0, max);
 	m_progress1.SetPos((m_progress1.get_upper() - m_progress1.get_lower()) / 2.0);
-	m_progress1.SetGradient();
-	m_progress1.SetColor(red, blue);
 	m_progress1.set_text_color(black, white);
 	m_progress1.show_text(true, CMacProgressCtrl::text_format_value);
 	m_progress1.use_invert_text_color();
+	m_progress1.set_style(CMacProgressCtrl::style_round_line);
+	m_progress1.use_slider();
 
 	//m_progress_marquee.SetMarquee(TRUE, 10);
 	//m_progress_marquee.SetIndeterminate();
@@ -174,7 +174,9 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_stepv.set_style(CSCSliderCtrl::slider_step);
 	m_slider_stepv.SetRange(0, 3);
 	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
-	*/
+
+	RestoreWindowPosition(&theApp, this);
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -329,4 +331,13 @@ BOOL CTest_SliderCtrlExDlg::PreTranslateMessage(MSG* pMsg)
 	}
 
 	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+
+void CTest_SliderCtrlExDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
+{
+	CDialogEx::OnWindowPosChanged(lpwndpos);
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	SaveWindowPosition(&theApp, this);
 }

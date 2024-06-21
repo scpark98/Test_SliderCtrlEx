@@ -58,4 +58,5 @@ public:
 	CSCSliderCtrl m_slider_step;
 	CSCSliderCtrl m_slider_stepv;
 	CMacProgressCtrl m_progress_marquee;
+	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 };
