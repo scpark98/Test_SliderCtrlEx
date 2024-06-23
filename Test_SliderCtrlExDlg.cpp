@@ -70,6 +70,8 @@ void CTest_SliderCtrlExDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SLIDER_STEP, m_slider_step);
 	DDX_Control(pDX, IDC_SLIDER_STEPV, m_slider_stepv);
 	DDX_Control(pDX, IDC_PROGRESS_MARQUEE, m_progress_marquee);
+	DDX_Control(pDX, IDC_SLIDER_PROGRESS, m_slider_progress);
+	DDX_Control(pDX, IDC_SLIDER_PROGRESS_LINE, m_slider_progress_line);
 }
 
 BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
@@ -145,6 +147,16 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_value.SetPos(max / 2);
 	m_slider_value.set_active_color(RGB(120, 215, 146));
 
+	m_slider_progress.set_style(CSCSliderCtrl::slider_progress);
+	m_slider_progress.SetRange(0, max);
+	m_slider_progress.SetPos(max / 2);
+	m_slider_progress.set_active_color(RGB(120, 215, 146));
+
+	m_slider_progress_line.set_style(CSCSliderCtrl::slider_progress_line);
+	m_slider_progress_line.SetRange(0, max);
+	m_slider_progress_line.SetPos(max / 2);
+	m_slider_progress_line.set_active_color(RGB(120, 215, 146));
+
 	m_slider_bookmark.use_bookmark();
 	m_slider_bookmark.set_bookmark_color(deeppink);
 	m_slider_bookmark.set_bookmark_current_color(lightpink);
@@ -174,6 +186,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_stepv.set_style(CSCSliderCtrl::slider_step);
 	m_slider_stepv.SetRange(0, 3);
 	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
+
 
 	RestoreWindowPosition(&theApp, this);
 
