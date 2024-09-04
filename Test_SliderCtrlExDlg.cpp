@@ -80,7 +80,7 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CTest_SliderCtrlExDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CTest_SliderCtrlExDlg::OnBnClickedCancel)
-	ON_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
+	ON_REGISTERED_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmark)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_CLEAR, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkClear)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_PREV, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkPrev)
@@ -125,7 +125,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	int i;
-	int max = 100;
+	int max = 200;
 
 	m_slider_normal.set_style(CSCSliderCtrl::style_normal);
 	m_slider_normal.SetRange(0, max);
@@ -157,10 +157,12 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_progress_line.SetPos(max / 2);
 	//m_slider_progress_line.set_active_color(RGB(120, 215, 146));
 
+	m_slider_bookmark.set_style(CSCSliderCtrl::style_track);
+	m_slider_bookmark.SetRange(0, max);
 	m_slider_bookmark.use_bookmark();
 	m_slider_bookmark.set_bookmark_color(deeppink);
 	m_slider_bookmark.set_bookmark_current_color(lightpink);
-	for (i = 0; i < 1; i++)
+	for (i = 0; i < 10; i++)
 		m_slider_bookmark.bookmark(CSCSliderCtrl::bookmark_add, random19937(0, (int)max));
 	m_slider_bookmark.use_tooltip(true);
 	m_slider_bookmark.set_tooltip_format(CSCSliderCtrl::tooltip_time);
@@ -168,7 +170,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	//m_progress1.SetIndeterminate();
 	//return TRUE;
 
-	m_progress1.SetRange32(0, max);
+	m_progress1.SetRange(0, max);
 	m_progress1.SetPos((m_progress1.get_upper() - m_progress1.get_lower()) / 2.0);
 	m_progress1.set_text_color(black, white);
 	m_progress1.show_text(true, CMacProgressCtrl::text_format_value);
@@ -266,6 +268,8 @@ LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lPara
 	m_slider_thumb.SetPos(msg->pos);
 	m_slider_thumb_round.SetPos(msg->pos);
 	m_slider_value.SetPos(msg->pos);
+	m_slider_progress.SetPos(msg->pos);
+	m_slider_progress_line.SetPos(msg->pos);
 	m_progress1.SetPos(msg->pos);
 	return 1;
 }
