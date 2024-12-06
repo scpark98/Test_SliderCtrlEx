@@ -40,7 +40,6 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
-	CMacProgressCtrl m_progress1;
 	afx_msg void OnBnClickedButtonBookmark();
 	afx_msg void OnBnClickedButtonBookmarkClear();
 	afx_msg void OnBnClickedButtonBookmarkPrev();
@@ -57,6 +56,7 @@ public:
 	CSCSliderCtrl m_slider_bookmark;
 	CSCSliderCtrl m_slider_step;
 	CSCSliderCtrl m_slider_stepv;
+	CMacProgressCtrl m_progress1;
 	CMacProgressCtrl m_progress_marquee;
 	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 	CSCSliderCtrl m_slider_progress;

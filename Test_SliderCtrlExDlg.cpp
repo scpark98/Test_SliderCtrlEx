@@ -178,6 +178,10 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_progress1.set_style(CMacProgressCtrl::style_round_line);
 	m_progress1.use_slider();
 
+	m_progress_marquee.set_style(CSCSliderCtrl::style_normal);
+	m_progress_marquee.set_back_color(red);
+	m_progress_marquee.SetPos(50);
+	m_progress_marquee.use_slider();
 	//m_progress_marquee.SetMarquee(TRUE, 10);
 	//m_progress_marquee.SetIndeterminate();
 
@@ -271,6 +275,7 @@ LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lPara
 	m_slider_progress.SetPos(msg->pos);
 	m_slider_progress_line.SetPos(msg->pos);
 	m_progress1.SetPos(msg->pos);
+	m_progress_marquee.SetPos(msg->pos);
 	return 1;
 }
 
