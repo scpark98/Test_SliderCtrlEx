@@ -72,6 +72,7 @@ void CTest_SliderCtrlExDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PROGRESS_MARQUEE, m_progress_marquee);
 	DDX_Control(pDX, IDC_SLIDER_PROGRESS, m_slider_progress);
 	DDX_Control(pDX, IDC_SLIDER_PROGRESS_LINE, m_slider_progress_line);
+	DDX_Control(pDX, IDC_SLIDER_PROGRESS_DUAL_TEXT, m_slider_progress_dual_text);
 }
 
 BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
@@ -127,6 +128,18 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	int i;
 	int max = 200;
 
+	CString str;
+	ULONGLONG dsize;
+
+	dsize = (ULONGLONG)1024;
+	str = get_size_str(dsize, -1);
+
+	//dsize = (ULONGLONG)1024 * 1024;
+	//dsize = (ULONGLONG)1024 * 1024 * 1024;
+	//dsize = (ULONGLONG)1024 * 1024 * 1024 * 2;
+	//dsize = (ULONGLONG)1024 * 1024 * 1024 * 3;
+	
+
 	m_slider_normal.set_style(CSCSliderCtrl::style_normal);
 	m_slider_normal.SetRange(0, max);
 	m_slider_normal.SetPos(max / 2);
@@ -145,16 +158,30 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_value.set_style(CSCSliderCtrl::style_value);
 	m_slider_value.SetRange(0, max);
 	m_slider_value.SetPos(max / 2);
-	//m_slider_value.set_active_color(RGB(120, 215, 146));
+	m_slider_value.set_active_color(RGB(120, 215, 146));
 
 	m_slider_progress.set_style(CSCSliderCtrl::style_progress);
 	m_slider_progress.SetRange(0, max);
 	m_slider_progress.SetPos(max / 2);
-	//m_slider_progress.set_active_color(RGB(120, 215, 146));
+	m_slider_progress.set_track_color(RGB(36, 160, 212), RGB(230, 230, 230));
+	m_slider_progress.set_text_style(CSCSliderCtrl::text_style_user_defined);
+	m_slider_progress.draw_progress_border();
+	m_slider_progress.set_text(_T("alskdjf"));
+	//m_slider_progress.set_progress_border_color(Gdiplus::Color::Red);
+
+	m_slider_progress_dual_text.set_style(CSCSliderCtrl::style_progress);
+	m_slider_progress_dual_text.SetRange(0, max);
+	m_slider_progress_dual_text.SetPos(max / 2);
+	m_slider_progress_dual_text.set_text_color(white);
+	m_slider_progress_dual_text.set_text_style(CSCSliderCtrl::text_style_dual_text);
+	//m_slider_progress_dual_text.set_text_dual(_T("dual text"));
+	//m_slider_progress_dual_text.set_font_name(_T("궁서"));
+	m_slider_progress_dual_text.set_font_size(8);
 
 	m_slider_progress_line.set_style(CSCSliderCtrl::style_progress_line);
 	m_slider_progress_line.SetRange(0, max);
 	m_slider_progress_line.SetPos(max / 2);
+
 	//m_slider_progress_line.set_active_color(RGB(120, 215, 146));
 
 	m_slider_bookmark.set_style(CSCSliderCtrl::style_track);
@@ -193,8 +220,10 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_stepv.SetRange(0, 3);
 	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
 
-
 	RestoreWindowPosition(&theApp, this);
+
+	int index = get_file_index(_T("D:\\temp\\새 폴더"), _T("새 폴더"));
+
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -272,10 +301,23 @@ LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lPara
 	m_slider_thumb.SetPos(msg->pos);
 	m_slider_thumb_round.SetPos(msg->pos);
 	m_slider_value.SetPos(msg->pos);
-	m_slider_progress.SetPos(msg->pos);
 	m_slider_progress_line.SetPos(msg->pos);
 	m_progress1.SetPos(msg->pos);
 	m_progress_marquee.SetPos(msg->pos);
+
+	m_slider_progress.SetPos(msg->pos);
+	m_slider_progress_dual_text.SetPos(msg->pos);
+
+	//text_style_user_defined일 경우
+	m_slider_progress.set_text(_T("%d / %d (%ld)"), msg->pos, m_slider_progress.get_max(), GetTickCount());
+	if (msg->pos > 80)
+		m_slider_progress.set_active_color(red);
+	else
+		m_slider_progress.set_active_color(RGB(36, 160, 212));
+
+	m_slider_progress_dual_text.set_text(_T("%d ~ %d"), m_slider_progress_dual_text.get_min(), msg->pos);
+	m_slider_progress_dual_text.set_text_dual(_T("%d ~ %d"), msg->pos, m_slider_progress_dual_text.get_max());
+
 	return 1;
 }
 

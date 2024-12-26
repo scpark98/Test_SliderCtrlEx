@@ -61,4 +61,5 @@ public:
 	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 	CSCSliderCtrl m_slider_progress;
 	CSCSliderCtrl m_slider_progress_line;
+	CSCSliderCtrl m_slider_progress_dual_text;
 };
