@@ -81,7 +81,7 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CTest_SliderCtrlExDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &CTest_SliderCtrlExDlg::OnBnClickedCancel)
-	ON_REGISTERED_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx)
+	ON_REGISTERED_MESSAGE(Message_CSCSliderCtrl, &CTest_SliderCtrlExDlg::on_message_CSCSliderCtrl)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmark)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_CLEAR, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkClear)
 	ON_BN_CLICKED(IDC_BUTTON_BOOKMARK_PREV, &CTest_SliderCtrlExDlg::OnBnClickedButtonBookmarkPrev)
@@ -167,6 +167,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_progress.set_text_style(CSCSliderCtrl::text_style_user_defined);
 	m_slider_progress.draw_progress_border();
 	m_slider_progress.set_text(_T("alskdjf"));
+	m_slider_progress.set_use_slide();
 	//m_slider_progress.set_progress_border_color(Gdiplus::Color::Red);
 
 	m_slider_progress_dual_text.set_style(CSCSliderCtrl::style_progress);
@@ -219,6 +220,8 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_stepv.set_style(CSCSliderCtrl::style_step);
 	m_slider_stepv.SetRange(0, 3);
 	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
+
+	m_check_enable.SetCheck(BST_CHECKED);
 
 	RestoreWindowPosition(&theApp, this);
 
@@ -294,7 +297,7 @@ void CTest_SliderCtrlExDlg::OnBnClickedCancel()
 	CDialogEx::OnCancel();
 }
 
-LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lParam)
+LRESULT CTest_SliderCtrlExDlg::on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lParam)
 {
 	CSCSliderCtrlMsg *msg = (CSCSliderCtrlMsg*)wParam;
 	m_slider_normal.SetPos(msg->pos);
@@ -318,7 +321,7 @@ LRESULT CTest_SliderCtrlExDlg::OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lPara
 	m_slider_progress_dual_text.set_text(_T("%d ~ %d"), m_slider_progress_dual_text.get_min(), msg->pos);
 	m_slider_progress_dual_text.set_text_dual(_T("%d ~ %d"), msg->pos, m_slider_progress_dual_text.get_max());
 
-	return 1;
+	return 0;
 }
 
 

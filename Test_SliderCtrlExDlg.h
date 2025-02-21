@@ -16,7 +16,7 @@ class CTest_SliderCtrlExDlg : public CDialogEx
 public:
 	CTest_SliderCtrlExDlg(CWnd* pParent = NULL);	// standard constructor
 
-	LRESULT		OnMessageSliderCtrlEx(WPARAM wParam, LPARAM lParam);
+	LRESULT		on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lParam);
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
