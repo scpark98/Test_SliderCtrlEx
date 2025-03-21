@@ -90,6 +90,8 @@ BEGIN_MESSAGE_MAP(CTest_SliderCtrlExDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECK_ENABLE, &CTest_SliderCtrlExDlg::OnBnClickedCheckEnable)
 	ON_WM_HSCROLL()
 	ON_WM_WINDOWPOSCHANGED()
+	ON_WM_TIMER()
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -205,25 +207,46 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_progress1.use_invert_text_color();
 	m_progress1.set_style(CMacProgressCtrl::style_round_line);
 	m_progress1.use_slider();
+	m_progress1.set_track_color(red);
 
 	m_progress_marquee.set_style(CSCSliderCtrl::style_normal);
 	m_progress_marquee.set_back_color(red);
 	m_progress_marquee.SetPos(50);
 	m_progress_marquee.use_slider();
-	//m_progress_marquee.SetMarquee(TRUE, 10);
-	//m_progress_marquee.SetIndeterminate();
+	m_progress_marquee.SetMarquee(TRUE, 10);
+	m_progress_marquee.SetIndeterminate();
 
 	m_slider_step.set_style(CSCSliderCtrl::style_step);
+	//m_slider_step.thumb
 	m_slider_step.SetRange(0, 3);
 	m_slider_step.set_step_image(-1, IDB_CHECKING_GRAY);
 
+
 	m_slider_stepv.set_style(CSCSliderCtrl::style_step);
-	m_slider_stepv.SetRange(0, 3);
+	m_slider_stepv.SetRange(0, 6);
 	m_slider_stepv.set_step_image(-1, IDB_CHECKING_GRAY);
+	m_slider_stepv.SetPos(4);
 
 	m_check_enable.SetCheck(BST_CHECKED);
 
+	m_progressDlg.create(this, _T("일반 진행 스텝 표시"), 0, 0, 320, 120);
+	m_progressDlg.set_text_color(Gdiplus::Color::LightGray);
+	m_progressDlg.set_back_color(Gdiplus::Color::RoyalBlue);
+	m_progressDlg.set_enable_move();
+	m_progressDlg.SetRange(0, 10);
+	m_progressDlg.ShowWindow(SW_SHOW);
+	SetTimer(timer_progress_step, 500, NULL);
+
+	m_progressDlg_marquee.create(this, _T("Marquee 상태 표시"), 0, 0, 320, 120);
+	m_progressDlg_marquee.set_text_color(Gdiplus::Color::LightGray);
+	m_progressDlg_marquee.set_back_color(Gdiplus::Color::RoyalBlue);
+	m_progressDlg_marquee.set_indeterminate();
+	m_progressDlg_marquee.set_enable_move();
+	m_progressDlg_marquee.ShowWindow(SW_SHOW);
+
 	RestoreWindowPosition(&theApp, this);
+	RestoreWindowPosition(&theApp, &m_progressDlg, _T("m_progressDlg"));
+	RestoreWindowPosition(&theApp, &m_progressDlg_marquee, _T("m_progressDlg_marquee"));
 
 	int index = get_file_index(_T("D:\\temp\\새 폴더"), _T("새 폴더"));
 
@@ -407,4 +430,43 @@ void CTest_SliderCtrlExDlg::OnWindowPosChanged(WINDOWPOS* lpwndpos)
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	SaveWindowPosition(&theApp, this);
+}
+
+void CTest_SliderCtrlExDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if (nIDEvent == timer_progress_step)
+	{
+		int32_t lower, upper;
+
+		m_progressDlg.get_range(lower, upper);
+		int pos = m_progressDlg.GetPos() + 1;
+		if (pos > upper)
+			pos = upper;
+		m_progressDlg.SetPos(pos);
+
+		m_slider_step.GetRange(lower, upper);
+		pos = m_slider_step.GetPos() + 1;
+		if (pos > upper)
+			pos = lower;
+		m_slider_step.SetPos(pos);
+
+		m_slider_stepv.GetRange(lower, upper);
+		pos = m_slider_stepv.GetPos() + 1;
+		if (pos > upper)
+			pos = lower;
+		m_slider_stepv.SetPos(pos);
+	}
+
+	CDialogEx::OnTimer(nIDEvent);
+}
+
+void CTest_SliderCtrlExDlg::OnDestroy()
+{
+	SaveWindowPosition(&theApp, &m_progressDlg, _T("m_progressDlg"));
+	SaveWindowPosition(&theApp, &m_progressDlg_marquee, _T("m_progressDlg_marquee"));
+
+	CDialogEx::OnDestroy();
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 }

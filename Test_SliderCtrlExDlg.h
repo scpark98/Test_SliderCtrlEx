@@ -7,6 +7,7 @@
 
 #include "../../Common/CSliderCtrl/SCSliderCtrl/SCSliderCtrl.h"
 #include "../../Common/CProgressCtrl/MacProgressCtrl/MacProgressCtrl.h"
+#include "../../Common/CDialog/SCProgressDlg/SCProgressDlg.h"
 #include "afxwin.h"
 
 // CTest_SliderCtrlExDlg dialog
@@ -16,7 +17,14 @@ class CTest_SliderCtrlExDlg : public CDialogEx
 public:
 	CTest_SliderCtrlExDlg(CWnd* pParent = NULL);	// standard constructor
 
+	CSCProgressDlg	m_progressDlg;
+	CSCProgressDlg	m_progressDlg_marquee;
 	LRESULT		on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lParam);
+
+	enum TIMER_ID
+	{
+		timer_progress_step = 0,
+	};
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -62,4 +70,6 @@ public:
 	CSCSliderCtrl m_slider_progress;
 	CSCSliderCtrl m_slider_progress_line;
 	CSCSliderCtrl m_slider_progress_dual_text;
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnDestroy();
 };
