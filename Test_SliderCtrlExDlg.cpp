@@ -317,6 +317,9 @@ void CTest_SliderCtrlExDlg::OnBnClickedOk()
 void CTest_SliderCtrlExDlg::OnBnClickedCancel()
 {
 	// TODO: Add your control notification handler code here
+	SaveWindowPosition(&theApp, &m_progressDlg, _T("m_progressDlg"));
+	SaveWindowPosition(&theApp, &m_progressDlg_marquee, _T("m_progressDlg_marquee"));
+
 	CDialogEx::OnCancel();
 }
 
@@ -463,9 +466,6 @@ void CTest_SliderCtrlExDlg::OnTimer(UINT_PTR nIDEvent)
 
 void CTest_SliderCtrlExDlg::OnDestroy()
 {
-	SaveWindowPosition(&theApp, &m_progressDlg, _T("m_progressDlg"));
-	SaveWindowPosition(&theApp, &m_progressDlg_marquee, _T("m_progressDlg_marquee"));
-
 	CDialogEx::OnDestroy();
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
