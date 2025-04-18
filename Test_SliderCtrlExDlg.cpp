@@ -292,7 +292,7 @@ void CTest_SliderCtrlExDlg::OnPaint()
 	}
 	else
 	{
-		CDialogEx::OnPaint();
+		//CDialogEx::OnPaint();
 	}
 }
 
@@ -338,14 +338,14 @@ LRESULT CTest_SliderCtrlExDlg::on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lP
 	m_slider_progress_dual_text.SetPos(msg->pos);
 
 	//text_style_user_definedÀÏ °æ¿ì
-	m_slider_progress.set_text(_T("%d / %d (%ld)"), msg->pos, m_slider_progress.get_max(), GetTickCount());
+	m_slider_progress.set_text(_T("%d / %d (%ld)"), msg->pos, m_slider_progress.get_upper(), GetTickCount());
 	if (msg->pos > 80)
 		m_slider_progress.set_active_color(red);
 	else
 		m_slider_progress.set_active_color(RGB(36, 160, 212));
 
-	m_slider_progress_dual_text.set_text(_T("%d ~ %d"), m_slider_progress_dual_text.get_min(), msg->pos);
-	m_slider_progress_dual_text.set_text_dual(_T("%d ~ %d"), msg->pos, m_slider_progress_dual_text.get_max());
+	m_slider_progress_dual_text.set_text(_T("%d ~ %d"), m_slider_progress_dual_text.get_lower(), msg->pos);
+	m_slider_progress_dual_text.set_text_dual(_T("%d ~ %d"), msg->pos, m_slider_progress_dual_text.get_upper());
 
 	return 0;
 }
