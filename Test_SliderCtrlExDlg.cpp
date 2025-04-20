@@ -147,6 +147,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_normal.SetPos(max / 2);
 	//m_slider_normal.set_active_color(RGB(120, 215, 146));
 
+	//m_slider_thumb.set_color_theme(CSCColorTheme::color_theme_default);
 	m_slider_thumb.set_style(CSCSliderCtrl::style_thumb);
 	m_slider_thumb.SetRange(0, max);
 	m_slider_thumb.SetPos(max / 2);
@@ -160,12 +161,12 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_value.set_style(CSCSliderCtrl::style_value);
 	m_slider_value.SetRange(0, max);
 	m_slider_value.SetPos(max / 2);
-	m_slider_value.set_active_color(RGB(120, 215, 146));
+	m_slider_value.set_active_color(gRGB(120, 215, 146));
 
 	m_slider_progress.set_style(CSCSliderCtrl::style_progress);
 	m_slider_progress.SetRange(0, max);
 	m_slider_progress.SetPos(max / 2);
-	m_slider_progress.set_track_color(RGB(36, 160, 212), RGB(230, 230, 230));
+	m_slider_progress.set_track_color(gRGB(36, 160, 212), gRGB(230, 230, 230));
 	m_slider_progress.set_text_style(CSCSliderCtrl::text_style_user_defined);
 	m_slider_progress.draw_progress_border();
 	m_slider_progress.set_text(_T("alskdjf"));
@@ -190,8 +191,8 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_bookmark.set_style(CSCSliderCtrl::style_track);
 	m_slider_bookmark.SetRange(0, max);
 	m_slider_bookmark.use_bookmark();
-	m_slider_bookmark.set_bookmark_color(deeppink);
-	m_slider_bookmark.set_bookmark_current_color(lightpink);
+	m_slider_bookmark.set_bookmark_color(Gdiplus::Color::DeepPink);
+	m_slider_bookmark.set_bookmark_current_color(Gdiplus::Color::LightPink);
 	for (i = 0; i < 10; i++)
 		m_slider_bookmark.bookmark(CSCSliderCtrl::bookmark_add, random19937(0, (int)max));
 	m_slider_bookmark.use_tooltip(true);
@@ -202,15 +203,15 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 
 	m_progress1.SetRange(0, max);
 	m_progress1.SetPos((m_progress1.get_upper() - m_progress1.get_lower()) / 2.0);
-	m_progress1.set_text_color(black, white);
+	m_progress1.set_text_color(Gdiplus::Color::Black, Gdiplus::Color::White);
 	m_progress1.show_text(true, CMacProgressCtrl::text_format_value);
 	m_progress1.use_invert_text_color();
 	m_progress1.set_style(CMacProgressCtrl::style_round_line);
 	m_progress1.use_slider();
-	m_progress1.set_track_color(red);
+	m_progress1.set_track_color(Gdiplus::Color::Red);
 
 	m_progress_marquee.set_style(CSCSliderCtrl::style_normal);
-	m_progress_marquee.set_back_color(red);
+	m_progress_marquee.set_back_color(Gdiplus::Color::Red);
 	m_progress_marquee.SetPos(50);
 	m_progress_marquee.use_slider();
 	m_progress_marquee.SetMarquee(TRUE, 10);
@@ -340,7 +341,7 @@ LRESULT CTest_SliderCtrlExDlg::on_message_CSCSliderCtrl(WPARAM wParam, LPARAM lP
 	//text_style_user_definedÀÏ °æ¿ì
 	m_slider_progress.set_text(_T("%d / %d (%ld)"), msg->pos, m_slider_progress.get_upper(), GetTickCount());
 	if (msg->pos > 80)
-		m_slider_progress.set_active_color(red);
+		m_slider_progress.set_active_color(Gdiplus::Color::Red);
 	else
 		m_slider_progress.set_active_color(RGB(36, 160, 212));
 
