@@ -128,7 +128,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	int i;
-	int max = 200;
+	int max = 100;
 
 	CString str;
 	ULONGLONG dsize;
@@ -145,6 +145,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_normal.set_style(CSCSliderCtrl::style_normal);
 	m_slider_normal.SetRange(0, max);
 	m_slider_normal.SetPos(max / 2);
+	m_slider_normal.SetTicFreq(23);
 	//m_slider_normal.set_active_color(RGB(120, 215, 146));
 
 	//m_slider_thumb.set_color_theme(CSCColorTheme::color_theme_default);
@@ -156,7 +157,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_thumb_round.set_style(CSCSliderCtrl::style_thumb_round);
 	m_slider_thumb_round.SetRange(0, max);
 	m_slider_thumb_round.SetPos(max / 2);
-	//m_slider_thumb_round.set_active_color(RGB(120, 215, 146));
+	m_slider_thumb_round.set_tic_freq(10);
 
 	m_slider_value.set_style(CSCSliderCtrl::style_value);
 	m_slider_value.SetRange(0, max);
