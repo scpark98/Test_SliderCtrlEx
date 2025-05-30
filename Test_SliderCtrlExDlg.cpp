@@ -210,7 +210,8 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_progress1.use_invert_text_color();
 	m_progress1.set_style(CMacProgressCtrl::style_round_line);
 	m_progress1.use_slider();
-	m_progress1.set_track_color(Gdiplus::Color::Red);
+	//m_progress1.set_back_color(deeppink);
+	m_progress1.set_track_color(red);
 
 	m_progress_marquee.set_style(CSCSliderCtrl::style_normal);
 	m_progress_marquee.set_back_color(Gdiplus::Color::Red);
