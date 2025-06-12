@@ -173,7 +173,7 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_progress.draw_progress_border();
 	m_slider_progress.set_text(_T("alskdjf"));
 	m_slider_progress.set_use_slide();
-	//m_slider_progress.set_progress_border_color(Gdiplus::Color::Red);
+	m_slider_progress.set_progress_border_color(Gdiplus::Color::Red);
 
 	m_slider_progress_dual_text.set_style(CSCSliderCtrl::style_progress);
 	m_slider_progress_dual_text.SetRange(0, max);
