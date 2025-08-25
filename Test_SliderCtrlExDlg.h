@@ -5,9 +5,9 @@
 #pragma once
 #include "afxcmn.h"
 
-#include "../../Common/CSliderCtrl/SCSliderCtrl/SCSliderCtrl.h"
-#include "../../Common/CProgressCtrl/MacProgressCtrl/MacProgressCtrl.h"
-#include "../../Common/CDialog/SCProgressDlg/SCProgressDlg.h"
+#include "Common/CSliderCtrl/SCSliderCtrl/SCSliderCtrl.h"
+#include "Common/CProgressCtrl/MacProgressCtrl/MacProgressCtrl.h"
+#include "Common/CDialog/SCProgressDlg/SCProgressDlg.h"
 #include "afxwin.h"
 
 // CTest_SliderCtrlExDlg dialog

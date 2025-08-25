@@ -7,7 +7,7 @@
 #include "Test_SliderCtrlExDlg.h"
 #include "afxdialogex.h"
 
-#include "../../Common/Functions.h"
+#include "Common/Functions.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -152,12 +152,15 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_thumb.set_style(CSCSliderCtrl::style_thumb);
 	m_slider_thumb.SetRange(0, max);
 	m_slider_thumb.SetPos(max / 2);
-	//m_slider_thumb.set_active_color(RGB(120, 215, 146));
+	m_slider_thumb.set_thumb_color(Gdiplus::Color::RoyalBlue);
 
 	m_slider_thumb_round.set_style(CSCSliderCtrl::style_thumb_round);
 	m_slider_thumb_round.SetRange(0, max);
 	m_slider_thumb_round.SetPos(max / 2);
 	m_slider_thumb_round.set_tic_freq(10);
+	m_slider_thumb_round.set_thumb_color(Gdiplus::Color::Red);
+	m_slider_thumb_round.set_tic_color(Gdiplus::Color::Blue);
+	m_slider_thumb_round.set_track_color(Gdiplus::Color::Yellow, Gdiplus::Color::Gainsboro);
 
 	m_slider_value.set_style(CSCSliderCtrl::style_value);
 	m_slider_value.SetRange(0, max);
