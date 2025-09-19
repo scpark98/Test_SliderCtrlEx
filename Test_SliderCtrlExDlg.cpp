@@ -171,12 +171,13 @@ BOOL CTest_SliderCtrlExDlg::OnInitDialog()
 	m_slider_progress.SetRange(0, max);
 	m_slider_progress.SetPos(max / 2);
 	m_slider_progress.set_track_color(gRGB(36, 160, 212), gRGB(230, 230, 230));
-	m_slider_progress.set_text_style(CSCSliderCtrl::text_style_user_defined);
-	m_slider_progress.set_font_size(6);
+	//m_slider_progress.set_text_style(CSCSliderCtrl::text_style_user_defined);
+	m_slider_progress.set_text_style(CSCSliderCtrl::text_style_percentage);
+	m_slider_progress.set_font_size(8);
 	m_slider_progress.draw_progress_border();
-	m_slider_progress.set_text(_T("alskdjf"));
+	//m_slider_progress.set_text(_T("alskdjf"));
 	m_slider_progress.set_use_slide();
-	m_slider_progress.set_progress_border_color(Gdiplus::Color::Red);
+	m_slider_progress.set_progress_border_color(Gdiplus::Color::LightGray);
 
 	m_slider_progress_dual_text.set_style(CSCSliderCtrl::style_progress);
 	m_slider_progress_dual_text.SetRange(0, max);
